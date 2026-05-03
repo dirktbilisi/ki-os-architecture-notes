@@ -8,19 +8,23 @@
 
 ## TL;DR
 
-Personal AI workflows rot fast without architectural discipline. The patterns that survive over months — verified against 12 months of daily production use — separate concerns explicitly across four layers:
+Personal AI workflows rot fast without architectural discipline. The patterns that survive over months — verified against 12 months of daily production use — separate concerns explicitly across **five layers** (originally four — the Vector layer was added 2026-05-03 after first production use):
 
 ```
 WORKFLOWS  (start / sync / shutdown — the rhythm)
    ↓
 SKILLS     (discrete capabilities, slash-triggered)
    ↓
-MEMORY     (hot / episodic / semantic — what the model recalls)
+MEMORY     (hot / episodic / semantic — Markdown-based)
+   ↓
+VECTOR     (semantic search across the entire vault — added v1.1)  ← NEW
    ↓
 STATE      (what is true right now — kernel, session, goals)
 ```
 
-Twelve anti-patterns in this repo describe what doesn't work, with the reasoning attached. The most useful section.
+Twelve anti-patterns in this repo describe what doesn't work, with the reasoning attached. **The most useful section.**
+
+The Vector layer (Qdrant + MCP) is documented separately in [vector-memory.md](./vector-memory.md) — it transforms the vault from a structured archive into an active memory system that can answer "what did I think about X six months ago?" without requiring path knowledge.
 
 ---
 
@@ -28,9 +32,10 @@ Conceptual notes from running an AI-augmented personal operating system for ~12 
 
 ## What's in here
 
-- **[Architecture](./architecture.md)** — the four layers (state, memory, skills, workflows) and how they fit together
+- **[Architecture](./architecture.md)** — the five layers (state, memory, vector, skills, workflows) and how they fit together
 - **[Load Order](./load-order.md)** — what context the model gets at session start, in which order, why
 - **[Memory Patterns](./memory-patterns.md)** — hot / episodic / semantic memory and what each is for
+- **[Vector Memory](./vector-memory.md)** — the fourth memory layer (Qdrant-based), added v1.1
 - **[Workflow Cycles](./workflow-cycles.md)** — start / sync / shutdown rhythm and why time-discipline matters with LLMs
 - **[Anti-patterns](./anti-patterns.md)** — what doesn't work and why I stopped doing it
 
@@ -67,11 +72,24 @@ It's notes. Some are universal, some are specific. Read accordingly.
 
 ## Roadmap
 
+- [x] **v1.1 (2026-05-03)** — Added Vector-Memory layer (Qdrant + MCP). Architecture moved from 4 to 5 layers. See [vector-memory.md](./vector-memory.md).
 - [ ] Concrete file structure templates (the literal directory tree of a working setup)
 - [ ] Comparison: this approach vs. Cursor / Claude Projects / GPTs / open-source alternatives
 - [ ] Migration guide: from ad-hoc Obsidian-vault to layered AI-OS
 - [ ] Tooling section: scripts, hooks, shell aliases that make the discipline easier
 - [ ] More anti-patterns as they emerge from continued use
+
+## Related work
+
+This is one of many takes on the personal-AI-OS pattern. Notable peers:
+
+- [PAI (Personal AI Infrastructure)](https://github.com/danielmiessler/Personal_AI_Infrastructure) by Daniel Miessler — "Life OS" with purpose-organized memory
+- [OneBrain](https://github.com/kengio/onebrain) — Obsidian-native AI OS layer
+- [OpenDAN-Personal-AI-OS](https://github.com/fiatrete/OpenDAN-Personal-AI-OS) — modular, Docker-based personal AI OS
+- [AIS-OS](https://github.com/nateherkai/AIS-OS) — Claude Code starter kit (3M framework)
+- [Karpathy's LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — foundational inspiration
+
+What sets these notes apart: focus on the **solo learning-architect's workflow** — strict workflow cycles, brand-voice-aware skill conventions, and (since v1.1) integrated Vector-Memory for active cross-session knowledge activation.
 
 Issues and pull requests welcome — see [Contributing](./CONTRIBUTING.md).
 

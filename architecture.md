@@ -1,6 +1,8 @@
-# Architecture — Four Layers
+# Architecture — Five Layers
 
-The system that holds up over time has four layers. Each layer answers a different question. Mixing them — which is the natural drift — produces the chaos that kills personal AI workflows.
+> **v1.1 (2026-05-03):** added the **Vector** layer between Memory and State. Original architecture had four layers; production use surfaced the need for active semantic retrieval. See [vector-memory.md](./vector-memory.md) for the full reasoning.
+
+The system that holds up over time has five layers. Each layer answers a different question. Mixing them — which is the natural drift — produces the chaos that kills personal AI workflows.
 
 ## The four layers
 
@@ -15,12 +17,16 @@ The system that holds up over time has four layers. Each layer answers a differe
 │                       MEMORY                            │
 │  Hot / episodic / semantic — what the model recalls     │
 ├─────────────────────────────────────────────────────────┤
+│                  VECTOR (v1.1, NEW)                     │
+│  Semantic search across the entire vault                │
+│  Local Qdrant + MCP — see vector-memory.md              │
+├─────────────────────────────────────────────────────────┤
 │                        STATE                            │
 │  Truth at a point in time — kernel state, session, goals│
 └─────────────────────────────────────────────────────────┘
 ```
 
-Each layer is **lower than** the layer above. State changes most often. Workflows change least.
+Each layer is **lower than** the layer above. State changes most often. Workflows change least. The Vector layer sits between Memory and State because it indexes the Memory layer but operates more dynamically than State.
 
 ## Layer 1 — State
 
