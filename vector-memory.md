@@ -39,7 +39,9 @@ This makes vector memory a structural part of the system, not a bolt-on.
 
 The specific implementation matters less than the architectural slot. But for reference:
 
-- **Vector database:** [Qdrant](https://github.com/qdrant/qdrant) (Apache 2.0, Rust, local Docker container)
+- **Vector database:** [Qdrant](https://github.com/qdrant/qdrant) (Apache 2.0, Rust). Two install paths work equivalently:
+  - **Native binary** (preferred on macOS) — single static executable, started by `launchd` at login. No Docker daemon, lower idle RAM, faster boot.
+  - **Docker container** — fine if you already run Docker for other things; otherwise the native binary is the lower-overhead choice.
 - **MCP server:** [mcp-server-qdrant](https://github.com/qdrant/mcp-server-qdrant) (with fastmcp >=3.2.0 — the pinned 2.7.0 version has known CVEs)
 - **Embedding model:** `sentence-transformers/all-MiniLM-L6-v2` via [fastembed](https://github.com/qdrant/fastembed) (local, on-device, no API call)
 - **Indexer:** custom Python script that chunks Markdown by H2/H3 sections (max 2000 chars per chunk)
