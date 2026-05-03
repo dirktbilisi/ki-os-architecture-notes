@@ -1,5 +1,29 @@
 # AI-Driven Workflow Architecture — Notes
 
+> Conceptual notes from running an AI-augmented personal operating system for ~12 months as a solo operator. Not a framework, not a methodology, not a product — a record of what holds up over time when LLMs are part of your daily workflow.
+
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC_BY--SA_4.0-lightgrey.svg)](./LICENSE)
+
+---
+
+## TL;DR
+
+Personal AI workflows rot fast without architectural discipline. The patterns that survive over months — verified against 12 months of daily production use — separate concerns explicitly across four layers:
+
+```
+WORKFLOWS  (start / sync / shutdown — the rhythm)
+   ↓
+SKILLS     (discrete capabilities, slash-triggered)
+   ↓
+MEMORY     (hot / episodic / semantic — what the model recalls)
+   ↓
+STATE      (what is true right now — kernel, session, goals)
+```
+
+Twelve anti-patterns in this repo describe what doesn't work, with the reasoning attached. The most useful section.
+
+---
+
 Conceptual notes from running an AI-augmented personal operating system for ~12 months as a solo operator. This is not a framework, not a methodology, not a product — it's a record of what holds up over time when LLMs are part of your daily workflow.
 
 ## What's in here
@@ -41,6 +65,24 @@ It's notes. Some are universal, some are specific. Read accordingly.
 
 [CC BY-SA 4.0](./LICENSE) — use, adapt, remix freely, share-alike.
 
+## Roadmap
+
+- [ ] Concrete file structure templates (the literal directory tree of a working setup)
+- [ ] Comparison: this approach vs. Cursor / Claude Projects / GPTs / open-source alternatives
+- [ ] Migration guide: from ad-hoc Obsidian-vault to layered AI-OS
+- [ ] Tooling section: scripts, hooks, shell aliases that make the discipline easier
+- [ ] More anti-patterns as they emerge from continued use
+
+Issues and pull requests welcome — see [Contributing](./CONTRIBUTING.md).
+
+## Contributing
+
+Real-world failure modes you've discovered in your own AI-augmented workflows are the most valuable contribution. See [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ## Maintainer
 
-By [Dirk Häger](https://github.com/dirktbilisi) — independent learning architect at [focusinstitute.io](https://focusinstitute.io). 12 months of running a daily AI-augmented workflow has taught me what doesn't work; this repo is mostly about that.
+By [**Dirk Häger**](https://github.com/dirktbilisi) — independent learning architect at [focusinstitute.io](https://focusinstitute.io) · [LinkedIn](https://www.linkedin.com/in/dirkhaeger/)
+
+12 months of running a daily AI-augmented workflow has taught me what doesn't work. This repo is mostly about that.
+
+If this saves you from rebuilding your second-brain three times like I did, ⭐ star the repo or share with another solo operator stuck in workflow chaos.
